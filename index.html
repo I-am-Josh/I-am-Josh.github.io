@@ -9,32 +9,84 @@
 		<meta name="description" content="Joshua whitaker. Social-web-entrepreneur, Linguis, English teacher and proofreader, Designer, coder">
 		<meta property="og:title" content="Joshua Whitaker">
 		<meta property="og:description" content="Joshua whitaker. Social-web-entrepreneur, Linguis, English teacher and proofreader, Designer, coder">
-		<link rel="icon" href="assets/icon.png">
-		<link rel="stylesheet" type="text/css" href="assets/reset.css">
 		<link rel="stylesheet" type="text/css" href="main.css">
 		<link rel="stylesheet" type="text/css" href="hexagon.css">
+		<style>
+			html, body {
+				margin:0;
+			}
+		</style>
 	</head>
 	<body>
-		<div id="page">
-			<div id="picture">
-				<div class="hexagon">
-					<div class="hexTop"></div>
-					<div class="hexBottom"></div>
+		<canvas id="draw" class="drawable" width="800" height="800"></canvas>
+			<div id="page">
+				<div id="picture">
+					<div class="hexagon">
+						<div class="hexTop"></div>
+						<div class="hexBottom"></div>
+					</div>
+				</div>
+				<div id="description">
+					<h1>Joshua St John Whitaker</h1>
+					<p>Building a Startup in Berlin</p>
+					<nav>
+						<ul>
+							<li><a href="mailto: joshuawhitaker44@gmail.com">Mail</a></li>
+							<li><a href="https://www.linkedin.com/in/josh-whitaker-98bb9877">Linkedin</a></li>
+							<li><a href="https://github.com/I-am-Josh">GitHub</a></li>
+						</ul>
+					</nav>
 				</div>
 			</div>
-			<div id="description">
-				<h1>Joshua St John Whitaker</h1>
-				<p>Building a Startup in Berlin</p>
-				<nav>
-					<ul>
-						<li><a href="mailto: joshuawhitaker44@gmail.com">Mail</a></li>
-						<li><a href="https://www.linkedin.com/in/josh-whitaker-98bb9877">Linkedin</a></li>
-						<li><a href="https://github.com/I-am-Josh">GitHub</a></li>
-					</ul>
-				</nav>
-			</div>
-		</div>
+
+		<script>
+			const canvas = document.querySelector('#draw');
+			const ctx = canvas.getContext('2d');
+			canvas.width = window.innerWidth;
+			canvas.height = window.innerHeight;
+			ctx.strokeStyle = '#BADASS';
+			ctx.lineJoin = 'round';
+			ctx.lineCap = 'round';
+			ctx.lineWidth = 50;
+
+			let isDrawing = false;
+			let lastX = 0;
+			let lastY = 0;
+			let hue = 0;
+			let direction = true;
+
+			function draw(e) {
+				if (!isDrawing) return;
+				ctx.strokeStyle = `hsl(${hue}, 100%, 70%)`;
+				ctx.beginPath();
+				ctx.moveTo(lastX, lastY);
+				ctx.lineTo(e.offsetX, e.offsetY);
+				ctx.stroke();
+				[lastX, lastY] = [e.offsetX, e.offsetY];
+
+				hue++;
+				if (hue >= 360) {
+					hue = 0;
+				}
+				if (ctx.lineWidth >= 500 || ctx.lineWidth <= 1) {
+					direction = !direction;
+				}
+				if (direction) {
+					ctx.lineWidth++;
+				} else {
+					ctx.lineWidth--;
+				}
+			}
+
+			canvas.addEventListener('mousemove', (e) => {
+				isDrawing = true;
+				[lastX, lastY] = [e.offsetX, e.offsetY];
+			})
+
+			canvas.addEventListener('mousemove', draw);
+			canvas.addEventListener('mouseup', () => isDrawing = false);
+			canvas.addEventListener('mouseout', () => isDrawing = false);
+			console.log("did add event listeners");
+		</script>
 	</body>
-
-
 </html>

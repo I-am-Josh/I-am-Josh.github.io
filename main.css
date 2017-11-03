@@ -1,17 +1,7 @@
-body{
-	background: #fff;
-	display: flex;
-	align-items: center;
-	color: #000;
-	font-size: 100%;
-	font-family: Helvetica;
-	padding: 0;
-	min-height: 100vh;
-	position: relative;
-  margin: 0;
-}
+
 a{
 	color: #03a;
+	pointer-events: all;
 }
 p{
 	color: #333;
@@ -30,11 +20,6 @@ a:hover{
 	opacity: 0.8;
 }
 
-#page{
-	width: 100%;
-	display: block;
-	padding: 1em .2em;
-}
 .footerPage{
 	font-size: 1.3em;
 	text-align: center;
@@ -125,4 +110,33 @@ nav ul{
 @media screen and (max-width: 400px) {
 	body{font-size: 80%;}
 	#picture{font-size: 100%;}
+}
+
+canvas {
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+}
+
+#page{
+	width: 100%;
+	display: block;
+
+	position: absolute;
+	z-index: 10;
+	pointer-events: none;
+	margin: 0;
+}
+
+body{
+	display: flex;
+	align-items: center;
+	font-size: 100%;
+	font-family: Helvetica;
+	padding: 0;
+	min-height: 100vh;
+  margin: 0;
+	padding: 0;
 }
