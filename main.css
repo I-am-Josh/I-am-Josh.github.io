@@ -140,3 +140,11 @@ body{
   margin: 0;
 	padding: 0;
 }
+
+.icons{
+	height: 40px;
+}
+
+#githubicon{
+	height: 43px;
+}
