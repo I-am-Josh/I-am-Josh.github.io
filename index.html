@@ -58,7 +58,10 @@
 				ctx.moveTo(lastX, lastY);
 				ctx.lineTo(e.offsetX, e.offsetY);
 				ctx.stroke();
-				[lastX, lastY] = [e.offsetX, e.offsetY];
+				//[lastX, lastY] = [e.offsetX, e.offsetY];
+				lastX = e.offsetX;
+				lastY = e.offsetY;
+			
 
 				if(hue <= 0){
 					directionChanged = 0;
@@ -80,12 +83,16 @@
 					ctx.lineWidth--;
 				}
 			}
-
-			canvas.addEventListener('mousemove', (e) => {
+			canvas.addEventListener("mousemove", function(){
+ 			//canvas.addEventListener('mousemove', (e) => {
 				isDrawing = true;
-				[lastX, lastY] = [e.offsetX, e.offsetY];
+				// [lastX, lastY] = [e.offsetX, e.offsetY]; 
+				lastX = e.offsetX;
+				lastY = e.offsetY;
 			})
 
+			
+			
 			canvas.addEventListener('mousemove', draw);
 			canvas.addEventListener('mouseup', () => isDrawing = false);
 			canvas.addEventListener('mouseout', () => isDrawing = false);
